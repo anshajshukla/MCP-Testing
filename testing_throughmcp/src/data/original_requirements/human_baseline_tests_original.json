@@ -1,0 +1,111 @@
+[
+  {
+    "id": "FP-001",
+    "name": "Successful Full Payment with Early Bird Bonus",
+    "description": "Tests the ideal scenario where a user pays the full amount more than 5 days early.",
+    "module": "Payments & Rewards",
+    "priority": "high",
+    "category": "Happy Path",
+    "steps": [
+      "Login to FinClusive app.",
+      "Select a credit card with an outstanding amount of 50,000.",
+      "Verify the payment due date is 10 days from now.",
+      "Enter 50,000 in the 'Amount to Pay' field.",
+      "Select UPI as the payment method and complete the transaction.",
+      "Navigate to the Rewards summary page."
+    ],
+    "expected_result": "The transaction is successful. The user should receive 500 standard points (50000/100), a 500 point full-payment bonus, and a 200 point early-payment bonus, for a total of 1200 points."
+  },
+  {
+    "id": "PP-001",
+    "name": "Successful Partial Minimum Payment",
+    "description": "Tests that a user can make a partial payment equal to the minimum required amount.",
+    "module": "Payments & Rewards",
+    "priority": "medium",
+    "category": "Partial Payments",
+    "steps": [
+      "Login to FinClusive app.",
+      "Select a credit card with an outstanding amount of 25,000.",
+      "Enter 100 in the 'Amount to Pay' field.",
+      "Select Net Banking as the payment method and complete the transaction.",
+      "Navigate to the Rewards summary page."
+    ],
+    "expected_result": "The transaction is successful. The user should receive 1 standard reward point (100/100). No full-payment or other bonuses should be applied."
+  },
+  {
+    "id": "AP-001",
+    "name": "Verify Monthly Auto-Pay Bonus",
+    "description": "Tests that a user with auto-pay enabled receives their passive monthly bonus.",
+    "module": "Rewards",
+    "priority": "medium",
+    "category": "Happy Path",
+    "steps": [
+      "Login with a user who has had Auto-Pay enabled for an entire billing cycle.",
+      "Make a standard partial payment of 10,000.",
+      "Navigate to the Rewards summary page.",
+      "Check the monthly rewards statement."
+    ],
+    "expected_result": "The user should receive 100 standard points for the payment, and the monthly statement should show a separate credit of 100 points for the Auto-Pay bonus."
+  },
+  {
+    "id": "REG-001",
+    "name": "New User Registration and Card Addition",
+    "description": "Tests the complete end-to-end flow for a new user signing up and adding their first card.",
+    "module": "User Registration",
+    "priority": "high",
+    "category": "User Journeys",
+    "steps": [
+        "Enter a new 10-digit mobile number.",
+        "Submit the 6-digit OTP received.",
+        "Set a strong password and a 4-digit PIN.",
+        "On the dashboard, navigate to 'Add Card'.",
+        "Enter a valid 16-digit card number, name, and future expiry date.",
+        "Complete the 1 rupee verification transaction."
+    ],
+    "expected_result": "User account is created successfully, and the new credit card appears in the user's list of managed cards."
+  },
+  {
+    "id": "SEC-001",
+    "name": "OTP Required for High Value Payment",
+    "description": "Tests that the OTP security check is triggered for payments over the 10,000 threshold.",
+    "module": "Security",
+    "priority": "high",
+    "category": "Security",
+    "steps": [
+        "Login to the app.",
+        "Select a card and choose to pay a custom amount of 15,000.",
+        "Proceed to the payment confirmation screen."
+    ],
+    "expected_result": "The application must prompt the user to enter a 6-digit OTP before the transaction can be completed."
+  },
+  {
+    "id": "REW-001",
+    "name": "Redeem Minimum Points for Cashback",
+    "description": "Tests the reward redemption functionality at the minimum allowed threshold.",
+    "module": "Rewards",
+    "priority": "medium",
+    "category": "Happy Path",
+    "steps": [
+        "Login with a user who has more than 500 reward points.",
+        "Navigate to the 'Redeem Points' section.",
+        "Enter 500 points to redeem.",
+        "Confirm the redemption."
+    ],
+    "expected_result": "500 points are deducted from the user's balance, and 5 rupees (500 points / 100) are credited to their wallet balance."
+  },
+  {
+    "id": "VAL-001",
+    "name": "Payment Below Minimum Amount is Rejected",
+    "description": "Tests the input validation for the custom payment amount field.",
+    "module": "Payment Validation",
+    "priority": "high",
+    "category": "Negative Path",
+    "steps": [
+        "Login to the app.",
+        "Select a card and choose to pay a custom amount.",
+        "Enter '99' into the amount field.",
+        "Attempt to proceed to the payment screen."
+    ],
+    "expected_result": "The 'Pay Now' button should be disabled, and an error message stating 'Minimum payment amount is 100' should be displayed."
+  }
+]
